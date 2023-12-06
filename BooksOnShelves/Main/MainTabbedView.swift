@@ -42,7 +42,7 @@ struct MainTabbedView: View {
         
         ZStack(alignment: .bottom){
             TabView(selection: $selectedTab) {
-                HomeView(userId: "SQbTRRiY8dRc6jiRLJ8KlAHYwKm2")
+                HomeView(userId: viewModel.currentUserId)
                     .tag(0)
 
                 //FavoriteView()
