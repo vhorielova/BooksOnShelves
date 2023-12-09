@@ -51,10 +51,10 @@ struct BookView: View {
             .padding()
         }
         .frame(maxWidth: .infinity, maxHeight: 150)
-        .padding(.horizontal, 35)
+
     }
 }
 
 #Preview {
-    BookView(item: .init(id: "123", title: "abc", author: "ghk", rate: "2", notes: [], quotes: [], createdDate: 0))
+    BookView(item: .init(id: "123", title: "abc", author: "ghk", rate: "2"))
 }

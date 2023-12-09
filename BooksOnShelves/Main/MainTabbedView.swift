@@ -36,19 +36,23 @@ enum TabbedItems: Int, CaseIterable{
 struct MainTabbedView: View {
     
     @State var selectedTab = 0
-    @StateObject var viewModel = ContentViewViewModel()
+    var userId: String
+    
+    init(userId: String) {
+        self.userId = userId
+    }
     
     var body: some View {
         
         ZStack(alignment: .bottom){
             TabView(selection: $selectedTab) {
-                HomeView(userId: viewModel.currentUserId)
+                HomeView(userId: userId)
                     .tag(0)
 
                 //FavoriteView()
                     //.tag(1)
 
-                WishListView(userId: viewModel.currentUserId)
+                WishListView(userId: userId)
                     .tag(1)
 
                 ProfileView()

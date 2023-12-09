@@ -31,21 +31,20 @@ struct HomeView: View {
                     .padding(.horizontal)
 
                 }
-                ScrollView{
-                    VStack{
-                        /*SortShelfView()
-                            .frame(maxWidth: /*@START_MENU_TOKEN@*/.infinity/*@END_MENU_TOKEN@*/, maxHeight: 70)
-                            .padding(.horizontal, 35)*/
-                        //Spacer()
-                        List(items) {item in
-                            Button{
-                                //go to the book
-                                //ProfileView()
-                            } label: {
-                                BookView(item: item)
-                            }
+                VStack{
+                    /*SortShelfView()
+                        .frame(maxWidth: /*@START_MENU_TOKEN@*/.infinity/*@END_MENU_TOKEN@*/, maxHeight: 70)
+                        .padding(.horizontal, 35)*/
+                    //Spacer()
+                    List(items) {item in
+                        Button{
+                            //go to the book
+                            //ProfileView()
+                        } label: {
+                            BookView(item: item)
                         }
                     }
+                    .listStyle(PlainListStyle())
                 }
                 Spacer()
             }
