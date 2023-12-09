@@ -22,7 +22,7 @@ class NewBookViewViewModel: ObservableObject {
         }
         
         let newId = UUID().uuidString
-        let newItem = Book(id: newId, title: title, author: author, rate: rate, notes: notes, quotes: [""], createdDate: Date().timeIntervalSince1970)
+        let newItem = Book(id: newId, title: title, author: author, rate: rate)
         
         let db = Firestore.firestore()
         

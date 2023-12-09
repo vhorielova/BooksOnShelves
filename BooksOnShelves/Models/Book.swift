@@ -6,8 +6,8 @@ struct Book: Codable, Identifiable {
     let title: String
     let author: String
     let rate: String
-    let notes: [String]
-    let quotes: [String]
-    let createdDate: TimeInterval
+    //let notes: [String]
+    //let quotes: [String]
+    //let createdDate: TimeInterval
     
 }
