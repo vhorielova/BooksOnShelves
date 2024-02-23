@@ -31,22 +31,22 @@ struct HomeView: View {
                     .padding(.horizontal)
 
                 }
-                VStack{
-                    /*SortShelfView()
-                        .frame(maxWidth: /*@START_MENU_TOKEN@*/.infinity/*@END_MENU_TOKEN@*/, maxHeight: 70)
-                        .padding(.horizontal, 35)*/
-                    //Spacer()
-                    List(items) {item in
-                        Button{
-                            //go to the book
-                            //ProfileView()
-                        } label: {
-                            BookView(item: item)
-                        }
-                    }
-                    .listStyle(PlainListStyle())
-                }
                 Spacer()
+                SortShelfView()
+                    //.frame(maxWidth: /*@START_MENU_TOKEN@*/.infinity/*@END_MENU_TOKEN@*/)
+                    .padding(.horizontal)
+                    .padding(.vertical, 5)
+
+                    //Spacer()
+                List(items) {item in
+                    Button{
+                        //go to the book
+                    } label: {
+                        BookView(item: item)
+                    }
+                }
+                .listStyle(PlainListStyle())
+            Spacer()
             }
             .sheet(isPresented: $viewModel.showingNewItemView) {
                 NewBookView(newItemPresented: $viewModel.showingNewItemView)
