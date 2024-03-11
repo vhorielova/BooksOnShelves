@@ -1,18 +1,29 @@
-//
-//  BooksView.swift
-//  BooksOnShelves
-//
-//  Created by Віка Горєлова on 04.03.2024.
-//
-
 import SwiftUI
+import FirebaseFirestoreSwift
 
 struct BooksView: View {
+    @StateObject var viewModel: BooksViewViewModel
+    @FirestoreQuery var items: [Book]
+    
+    let valueToCompare: Int
+    
+    init(userId: String, valueToCompare: Int) {
+        self._items = FirestoreQuery(collectionPath: "users/\(userId)/books")
+        self.valueToCompare = valueToCompare
+        self._viewModel = StateObject(wrappedValue: BooksViewViewModel(userId: userId))
+        print(valueToCompare)
+    }
+    
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        
+        List(viewModel.mergeSort(items, valueToCompare: valueToCompare)) {item in
+            Button{
+                //go to the book
+            } label: {
+                SingleBookView(item: item)
+            }
+        }
+        .listStyle(PlainListStyle())
     }
 }
 
-#Preview {
-    BooksView()
-}

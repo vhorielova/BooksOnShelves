@@ -5,7 +5,12 @@ class HomeViewViewModel: ObservableObject {
     
     private let userId: String
     
+    func getUserId() -> String {
+        return userId
+    }
+    
     init(userId: String) {
         self.userId = userId
     }
+    
 }

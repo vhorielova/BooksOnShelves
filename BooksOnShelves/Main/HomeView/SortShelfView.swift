@@ -1,26 +1,12 @@
 import SwiftUI
 
-enum SortItem: Int, CaseIterable{
-    case author = 0
-    case title
-    case rate
-    
-    var name: String{
-        switch self{
-        case .author:
-            return "За автором"
-        case .title:
-            return "За назвою"
-        case .rate:
-            return "За рейтингом"
-        }
-    }
-}
-
 struct SortShelfView: View {
+    @State var viewModel = SortShelfViewViewModel()
+    
     @State var sortValue:String = "За назвою"
     @State var name:String = "Сортування: "
     @State var show:Bool = false
+    @State var sortNumber:Int = 1
     
     var body: some View {
         //VStack{
@@ -67,6 +53,8 @@ struct SortShelfView: View {
                                 Button{
                                     withAnimation{
                                         sortValue = item.name
+                                        sortNumber = item.rawValue
+                                        //print(sortNumber)
                                         show.toggle()
                                     }
                                 } label: {

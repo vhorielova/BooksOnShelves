@@ -1,5 +1,5 @@
 import Foundation
 
-class BookViewViewModel: ObservableObject{
+class SingleBookViewViewModel: ObservableObject{
     init() {}
 }

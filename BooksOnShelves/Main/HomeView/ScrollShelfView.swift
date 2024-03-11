@@ -4,7 +4,7 @@ struct ScrollShelfView: View {
     var body: some View {
         ScrollView{
             VStack{
-                SortShelfView()
+                //SortShelfView()
                     .frame(maxWidth: /*@START_MENU_TOKEN@*/.infinity/*@END_MENU_TOKEN@*/, maxHeight: 70)
                     .padding(.horizontal, 35)
                 //Spacer()

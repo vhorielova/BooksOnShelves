@@ -33,19 +33,11 @@ struct HomeView: View {
                 }
                 Spacer()
                 SortShelfView()
-                    //.frame(maxWidth: /*@START_MENU_TOKEN@*/.infinity/*@END_MENU_TOKEN@*/)
                     .padding(.horizontal)
                     .padding(.vertical, 5)
 
                     //Spacer()
-                List(items) {item in
-                    Button{
-                        //go to the book
-                    } label: {
-                        BookView(item: item)
-                    }
-                }
-                .listStyle(PlainListStyle())
+                BooksView(userId: viewModel.getUserId(), valueToCompare: SortShelfView().sortNumber)
             Spacer()
             }
             .sheet(isPresented: $viewModel.showingNewItemView) {
