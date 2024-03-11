@@ -32,12 +32,9 @@ struct HomeView: View {
 
                 }
                 Spacer()
-                SortShelfView()
-                    .padding(.horizontal)
-                    .padding(.vertical, 5)
+                SortShelfView(userId: viewModel.getUserId())
 
                     //Spacer()
-                BooksView(userId: viewModel.getUserId(), valueToCompare: SortShelfView().sortNumber)
             Spacer()
             }
             .sheet(isPresented: $viewModel.showingNewItemView) {

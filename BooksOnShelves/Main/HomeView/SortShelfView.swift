@@ -1,7 +1,11 @@
 import SwiftUI
 
 struct SortShelfView: View {
-    @State var viewModel = SortShelfViewViewModel()
+    @StateObject var viewModel: SortShelfViewViewModel
+    
+    init(userId: String) {
+        self._viewModel = StateObject(wrappedValue: SortShelfViewViewModel(userId: userId))
+    }
     
     @State var sortValue:String = "За назвою"
     @State var name:String = "Сортування: "
@@ -54,7 +58,6 @@ struct SortShelfView: View {
                                     withAnimation{
                                         sortValue = item.name
                                         sortNumber = item.rawValue
-                                        //print(sortNumber)
                                         show.toggle()
                                     }
                                 } label: {
@@ -71,7 +74,11 @@ struct SortShelfView: View {
                 
                 }
                 .frame(height: show ? 120 : 0)
+                //Text(String(sortNumber))
             }
+            .padding(.horizontal)
+            .padding(.vertical, 5)
+        BooksView(userId: viewModel.getUserId(), valueToCompare: sortNumber)
         //}
         //.padding()
         //.frame(height: show ? 170 : 34)
@@ -80,5 +87,5 @@ struct SortShelfView: View {
 }
 
 #Preview {
-    SortShelfView()
+    SortShelfView(userId: "")
 }

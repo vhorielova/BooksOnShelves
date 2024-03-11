@@ -18,5 +18,13 @@ enum SortItem: Int, CaseIterable{
 }
 
 class SortShelfViewViewModel: ObservableObject {
+    private var userId: String = ""
     
+    init(userId: String) {
+        self.userId = userId
+    }
+    
+    func getUserId() -> String {
+        return userId
+    }
 }

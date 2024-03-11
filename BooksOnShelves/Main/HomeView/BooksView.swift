@@ -11,7 +11,6 @@ struct BooksView: View {
         self._items = FirestoreQuery(collectionPath: "users/\(userId)/books")
         self.valueToCompare = valueToCompare
         self._viewModel = StateObject(wrappedValue: BooksViewViewModel(userId: userId))
-        print(valueToCompare)
     }
     
     var body: some View {

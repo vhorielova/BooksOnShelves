@@ -55,6 +55,7 @@ class BooksViewViewModel: ObservableObject {
         let leftArray = mergeSort(Array(items[0..<middleIndex]), valueToCompare: valueToCompare)
         let rightArray = mergeSort(Array(items[middleIndex..<items.count]), valueToCompare: valueToCompare)
 
+        print(valueToCompare)
         return merge(leftArray, rightArray, valueToCompare: valueToCompare)
     }
     
