@@ -48,6 +48,10 @@ class BooksViewViewModel: ObservableObject {
         return mergedArray
     }
     
+    func getMerge(_ leftArray: [Book], _ rightArray: [Book], valueToCompare: Int) -> [Book]{
+        return merge(leftArray, rightArray, valueToCompare: valueToCompare)
+    }
+    
     func mergeSort(_ items: [Book], valueToCompare: Int) -> [Book] {
         guard items.count > 1 else { return items }
 
