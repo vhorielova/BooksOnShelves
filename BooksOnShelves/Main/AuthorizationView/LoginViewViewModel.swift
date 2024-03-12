@@ -15,23 +15,37 @@ class LoginViewViewModel: ObservableObject{
         }
         
         Auth.auth().signIn(withEmail: email, password: password)
+        
+        guard isSignedIn() else{
+            return
+        }
+    }
+    
+    private func isSignedIn() -> Bool {
+        errorMessage = ""
+        if Auth.auth().currentUser == nil{
+            errorMessage = "Wrong email or password"
+            return false
+        }
+            
+        return true
     }
     
     private func validate() -> Bool {
         errorMessage = ""
-        if email.trimmingCharacters(in: .whitespaces).isEmpty, password.trimmingCharacters(in: .whitespaces).isEmpty {
+        if email.trimmingCharacters(in: .whitespaces).isEmpty || password.trimmingCharacters(in: .whitespaces).isEmpty {
             
             errorMessage = "Fill in all fields"
             return false
         }
         
-        if !email.contains("@") && !email.contains("."){
+        if !email.contains("@") || !email.contains("."){
             
             errorMessage = "Enter valid email"
             return false
         }
 
-        let db = Firestore.firestore()
+        _ = Firestore.firestore()
         
         
         return true

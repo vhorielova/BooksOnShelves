@@ -34,15 +34,15 @@ class CreateAccountViewViewModel: ObservableObject{
     
     private func validate() -> Bool {
         errorMessage = ""
-        if name.trimmingCharacters(in: .whitespaces).isEmpty,
-           email.trimmingCharacters(in: .whitespaces).isEmpty,
+        if name.trimmingCharacters(in: .whitespaces).isEmpty ||
+           email.trimmingCharacters(in: .whitespaces).isEmpty ||
            password.trimmingCharacters(in: .whitespaces).isEmpty {
             
             errorMessage = "Fill in all fields"
             return false
         }
         
-        if !email.contains("@") && !email.contains("."){
+        if !email.contains("@") || !email.contains("."){
             
             errorMessage = "Enter valid email"
             return false
