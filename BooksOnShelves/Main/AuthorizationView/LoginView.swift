@@ -1,7 +1,3 @@
-//
-//  SwiftUIView.swift
-//  BooksOnShelves
-//
 import SwiftUI
 
 struct LoginView: View {
@@ -10,29 +6,29 @@ struct LoginView: View {
     
     var body: some View {
         
-        NavigationView{
+        NavigationView {
             
-            VStack{
+            VStack {
                 HeaderView()
                 
-                Form{
-                    if !viewModel.errorMessage.isEmpty{
+                Form {
+                    if !viewModel.errorMessage.isEmpty {
                         Text(viewModel.errorMessage)
                             .foregroundColor(.red)
                     }
                     TextField("Email address", text: $viewModel.email)
                         .textFieldStyle(RoundedBorderTextFieldStyle())
                         .autocorrectionDisabled()
-                        .autocapitalization(/*@START_MENU_TOKEN@*/.none/*@END_MENU_TOKEN@*/)
+                        .autocapitalization(.none)
                     SecureField("Password", text: $viewModel.password)
                         .textFieldStyle(RoundedBorderTextFieldStyle())
-                    TLButton(title: "Log in"){
+                    TLButton(title: "Log in") {
                         viewModel.login()
                     }
                 }
                 .background(.white)
                 
-                VStack{
+                VStack {
                     Text("Don't have an account yet?")
                         .foregroundColor(.black)
                     NavigationLink("Create an account", destination: CreateAccountView())

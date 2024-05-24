@@ -16,6 +16,10 @@ struct CreateAccountView: View {
                 TextField("Your name", text: $viewModel.name)
                     .textFieldStyle(RoundedBorderTextFieldStyle())
                     .autocorrectionDisabled()
+                TextField("Nickname", text: $viewModel.nickname)
+                    .textFieldStyle(RoundedBorderTextFieldStyle())
+                    .autocorrectionDisabled()
+                
                 TextField("Email address", text: $viewModel.email)
                     .textFieldStyle(RoundedBorderTextFieldStyle())
                     .autocorrectionDisabled()
