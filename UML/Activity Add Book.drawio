@@ -1,0 +1,93 @@
+<mxfile host="app.diagrams.net" modified="2024-03-12T19:34:21.511Z" agent="Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/118.0.0.0 Safari/537.36" etag="bPM8EaAfCKDz7EX8K0eT" version="24.0.5" type="device">
+  <diagram name="Сторінка-1" id="TXglrQ7ueLO5LsVMSAbP">
+    <mxGraphModel dx="933" dy="625" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="noKPgVU1rWevFvph-u30-1" value="" style="ellipse;html=1;shape=startState;fillColor=#000000;strokeColor=#ff0000;" vertex="1" parent="1">
+          <mxGeometry x="150" y="120" width="30" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="noKPgVU1rWevFvph-u30-2" value="" style="edgeStyle=orthogonalEdgeStyle;html=1;verticalAlign=bottom;endArrow=open;endSize=8;strokeColor=#ff0000;rounded=0;" edge="1" source="noKPgVU1rWevFvph-u30-1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="165" y="210" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="noKPgVU1rWevFvph-u30-4" value="Press &quot;add new book&quot;" style="rounded=1;whiteSpace=wrap;html=1;arcSize=40;fontColor=#000000;fillColor=#ffffc0;strokeColor=#ff0000;" vertex="1" parent="1">
+          <mxGeometry x="105" y="210" width="120" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="noKPgVU1rWevFvph-u30-5" value="" style="edgeStyle=orthogonalEdgeStyle;html=1;verticalAlign=bottom;endArrow=open;endSize=8;strokeColor=#ff0000;rounded=0;" edge="1" source="noKPgVU1rWevFvph-u30-4" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="165" y="310" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="noKPgVU1rWevFvph-u30-6" value="Fill the form of a book" style="rounded=1;whiteSpace=wrap;html=1;arcSize=40;fontColor=#000000;fillColor=#ffffc0;strokeColor=#ff0000;" vertex="1" parent="1">
+          <mxGeometry x="105" y="310" width="120" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="noKPgVU1rWevFvph-u30-7" value="" style="edgeStyle=orthogonalEdgeStyle;html=1;verticalAlign=bottom;endArrow=open;endSize=8;strokeColor=#ff0000;rounded=0;" edge="1" source="noKPgVU1rWevFvph-u30-6" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="165" y="410" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="noKPgVU1rWevFvph-u30-8" value="Press &quot;Save&quot;" style="rounded=1;whiteSpace=wrap;html=1;arcSize=40;fontColor=#000000;fillColor=#ffffc0;strokeColor=#ff0000;" vertex="1" parent="1">
+          <mxGeometry x="105" y="410" width="120" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="noKPgVU1rWevFvph-u30-9" value="" style="edgeStyle=orthogonalEdgeStyle;html=1;verticalAlign=bottom;endArrow=open;endSize=8;strokeColor=#ff0000;rounded=0;" edge="1" source="noKPgVU1rWevFvph-u30-8" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="165" y="510" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="noKPgVU1rWevFvph-u30-13" value="Save new book" style="rounded=1;whiteSpace=wrap;html=1;arcSize=40;fontColor=#000000;fillColor=#ffffc0;strokeColor=#ff0000;" vertex="1" parent="1">
+          <mxGeometry x="105" y="510" width="120" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="noKPgVU1rWevFvph-u30-14" value="" style="edgeStyle=orthogonalEdgeStyle;html=1;verticalAlign=bottom;endArrow=open;endSize=8;strokeColor=#ff0000;rounded=0;" edge="1" source="noKPgVU1rWevFvph-u30-13" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="165" y="610" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="noKPgVU1rWevFvph-u30-15" value="Condition" style="rhombus;whiteSpace=wrap;html=1;fontColor=#000000;fillColor=#ffffc0;strokeColor=#ff0000;" vertex="1" parent="1">
+          <mxGeometry x="125" y="610" width="80" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="noKPgVU1rWevFvph-u30-16" value="no" style="edgeStyle=orthogonalEdgeStyle;html=1;align=left;verticalAlign=bottom;endArrow=open;endSize=8;strokeColor=#ff0000;rounded=0;" edge="1" source="noKPgVU1rWevFvph-u30-15" parent="1">
+          <mxGeometry x="-1" relative="1" as="geometry">
+            <mxPoint x="310" y="630" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="noKPgVU1rWevFvph-u30-17" value="yes" style="edgeStyle=orthogonalEdgeStyle;html=1;align=left;verticalAlign=top;endArrow=open;endSize=8;strokeColor=#ff0000;rounded=0;" edge="1" source="noKPgVU1rWevFvph-u30-15" parent="1">
+          <mxGeometry x="-1" relative="1" as="geometry">
+            <mxPoint x="165" y="710" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="noKPgVU1rWevFvph-u30-18" value="&quot;Fill all the fieldes&quot; message" style="rounded=1;whiteSpace=wrap;html=1;arcSize=40;fontColor=#000000;fillColor=#ffffc0;strokeColor=#ff0000;" vertex="1" parent="1">
+          <mxGeometry x="310" y="610" width="120" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="noKPgVU1rWevFvph-u30-19" value="" style="edgeStyle=orthogonalEdgeStyle;html=1;verticalAlign=bottom;endArrow=open;endSize=8;strokeColor=#ff0000;rounded=0;entryX=1;entryY=0.5;entryDx=0;entryDy=0;" edge="1" source="noKPgVU1rWevFvph-u30-18" parent="1" target="noKPgVU1rWevFvph-u30-6">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="370" y="430" as="targetPoint" />
+            <Array as="points">
+              <mxPoint x="370" y="330" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="noKPgVU1rWevFvph-u30-20" value="Add new book to data base" style="rounded=1;whiteSpace=wrap;html=1;arcSize=40;fontColor=#000000;fillColor=#ffffc0;strokeColor=#ff0000;" vertex="1" parent="1">
+          <mxGeometry x="105" y="710" width="120" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="noKPgVU1rWevFvph-u30-21" value="" style="edgeStyle=orthogonalEdgeStyle;html=1;verticalAlign=bottom;endArrow=open;endSize=8;strokeColor=#ff0000;rounded=0;" edge="1" source="noKPgVU1rWevFvph-u30-20" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="165" y="810" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="noKPgVU1rWevFvph-u30-22" value="Return to HomeView" style="rounded=1;whiteSpace=wrap;html=1;arcSize=40;fontColor=#000000;fillColor=#ffffc0;strokeColor=#ff0000;" vertex="1" parent="1">
+          <mxGeometry x="105" y="810" width="120" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="noKPgVU1rWevFvph-u30-23" value="" style="edgeStyle=orthogonalEdgeStyle;html=1;verticalAlign=bottom;endArrow=open;endSize=8;strokeColor=#ff0000;rounded=0;" edge="1" source="noKPgVU1rWevFvph-u30-22" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="165" y="910" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="noKPgVU1rWevFvph-u30-24" value="" style="ellipse;html=1;shape=endState;fillColor=#000000;strokeColor=#ff0000;" vertex="1" parent="1">
+          <mxGeometry x="150" y="910" width="30" height="30" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

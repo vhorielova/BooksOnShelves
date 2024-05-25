@@ -55,7 +55,7 @@ struct MainTabbedView: View {
                 WishListView(userId: userId)
                     .tag(1)
 
-                ProfileView()
+                ProfileView(userId: userId)
                     .tag(2)
             }
             

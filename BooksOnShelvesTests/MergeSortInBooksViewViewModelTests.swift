@@ -10,7 +10,7 @@ import XCTest
 
 final class MergeSortInBooksViewViewModelTests: XCTestCase {
     
-    let viewModel = BooksViewViewModel(userId: "")
+    let viewModel = ListOfBooksViewViewModel(userId: "")
     let singleBook_1: Book = Book(id: "1", title: "1", author: "1", rate: "1")
     let singleBook_2: Book = Book(id: "2", title: "2", author: "2", rate: "2")
     let singleBook_3: Book = Book(id: "3", title: "3", author: "3", rate: "3")

@@ -4,15 +4,15 @@ struct HeaderView: View {
     var body: some View {
         ZStack{
             Rectangle()
-                .foregroundColor(.mainPink)
+                .foregroundColor(.violetBG)
             VStack(){
                 
                 Text("BOOKSHELVES")
-                    .foregroundColor(.white)
+                    .foregroundColor(.text)
                     .font(.system(size: 50))
                     .bold()
                 Text("Save all your books in one place")
-                    .foregroundColor(.white)
+                    .foregroundColor(.text)
                     .font(.system(size: 25))
             }
 

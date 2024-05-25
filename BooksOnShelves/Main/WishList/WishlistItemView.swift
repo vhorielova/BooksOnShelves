@@ -9,7 +9,9 @@ struct WishlistItemView: View {
             VStack(alignment: .leading){
                 Text(item.title)
                     .font(.body)
-                Text("\(Date(timeIntervalSince1970: item.dueDate).formatted(date: .abbreviated, time: .shortened))")
+                Text(item.author)
+                    .foregroundStyle(Color(.gray))
+                Text("\(Date(timeIntervalSince1970: item.createdDate).formatted(date: .abbreviated, time: .shortened))")
                 
             }
             
@@ -25,5 +27,5 @@ struct WishlistItemView: View {
 }
 
 #Preview {
-    WishlistItemView(item: .init(id: "123", title: "abc", dueDate: Date().timeIntervalSince1970, createdDate: Date().timeIntervalSince1970, isDone: false))
+    WishlistItemView(item: .init(id: "123", title: "abc", author: "fgh", createdDate: Date().timeIntervalSince1970, isDone: false))
 }

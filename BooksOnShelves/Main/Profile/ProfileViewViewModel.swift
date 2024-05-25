@@ -3,14 +3,15 @@ import FirebaseAuth
 import FirebaseFirestore
 
 class ProfileViewViewModel: ObservableObject {
-    init() {}
-    
     @Published var user: User? = nil
+    @Published var isCurrentUser: Bool = false
     
-    func fetchUser() {
-        guard let userId = Auth.auth().currentUser?.uid else {
+    func fetchUser(userId: String) {
+        guard let currentUserId = Auth.auth().currentUser?.uid else {
             return
         }
+        
+        isCurrentUser = (userId == currentUserId)
         
         let db = Firestore.firestore()
         
@@ -20,18 +21,21 @@ class ProfileViewViewModel: ObservableObject {
             }
             
             DispatchQueue.main.async {
-                self.user = User(id: data["id"] as? String ?? "",
-                                  name: data["name"] as? String ?? "",
-                                  email: data["email"] as? String ?? "",
-                                  joined: data["joined"] as? TimeInterval ?? 0)
+                self.user = User(
+                    id: data["id"] as? String ?? "",
+                    name: data["name"] as? String ?? "",
+                    email: data["email"] as? String ?? "",
+                    nickname: data["nickname"] as? String ?? "",
+                    joined: data["joined"] as? TimeInterval ?? 0
+                )
             }
         }
     }
     
     func logout() {
-        do{
+        do {
             try Auth.auth().signOut()
-        } catch{
+        } catch {
             print(error)
         }
     }

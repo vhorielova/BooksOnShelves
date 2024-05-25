@@ -1,8 +1,8 @@
 import SwiftUI
 
-struct SingleBookView: View {
+struct BookInListView: View {
     let item: Book
-    @StateObject var viewModel = SingleBookViewViewModel()
+    @StateObject var viewModel = BookInListViewViewModel()
     
     var body: some View {
         ZStack{
@@ -56,5 +56,5 @@ struct SingleBookView: View {
 }
 
 #Preview {
-    SingleBookView(item: .init(id: "123", title: "abc", author: "ghk", rate: "2"))
+    BookInListView(item: .init(id: "123", title: "abc", author: "ghk", rate: "2"))
 }

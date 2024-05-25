@@ -78,7 +78,7 @@ struct SortShelfView: View {
             }
             .padding(.horizontal)
             .padding(.vertical, 5)
-        BooksView(userId: viewModel.getUserId(), valueToCompare: sortNumber)
+        ListOfBooksView(userId: viewModel.getUserId(), valueToCompare: sortNumber)
         //}
         //.padding()
         //.frame(height: show ? 170 : 34)

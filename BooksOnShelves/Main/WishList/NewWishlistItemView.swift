@@ -13,10 +13,11 @@ struct NewWishlistItemView: View {
                 .padding(.top, 30)
             
             Form{
-                TextField("Title", text: $viewModel.title)
+                TextField("Title", text: $viewModel.title.input)
+                TextField("Author", text: $viewModel.author.input)
                 
-                DatePicker("Due Date", selection: $viewModel.dueDate)
-                    .datePickerStyle(GraphicalDatePickerStyle())
+                /*DatePicker("Due Date", selection: $viewModel.dueDate)
+                    .datePickerStyle(GraphicalDatePickerStyle())*/
                 
                 TLButton(title: "Save"){
                     if viewModel.canSave{

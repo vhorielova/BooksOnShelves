@@ -31,7 +31,7 @@ struct HomeView: View {
                     .padding(.horizontal)
 
                 }
-                Spacer()
+                 Spacer()
                 SortShelfView(userId: viewModel.getUserId())
 
                     //Spacer()
