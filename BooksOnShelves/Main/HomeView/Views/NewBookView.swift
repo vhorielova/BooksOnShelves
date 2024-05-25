@@ -15,11 +15,11 @@ struct NewBookView: View {
             Form{
                 TextField("Title", text: $viewModel.title)
                 TextField("Author", text: $viewModel.author)
-                TextField("Rate", text: $viewModel.rate)
-                //TextField()
+                TextField("Rate: from 1 to 10", text: $viewModel.rate)
+                    .keyboardType(.numberPad)
                 
-                TLButton(title: "Save"){
-                    if viewModel.canSave{
+                TLButton(title: "Save") {
+                    if viewModel.canSave {
                         viewModel.save()
                         newItemPresented = false
                     } else {
@@ -29,12 +29,11 @@ struct NewBookView: View {
                 .padding()
             }
         }
-        .background(.mainPink)
-        .alert(isPresented: $viewModel.showAlert){
-            Alert(title: Text("Error"), message: Text("Fill in at least \"Title\" field"))
+        .background(Color.mainPink)
+        .alert(isPresented: $viewModel.showAlert) {
+            Alert(title: Text("Error"), message: Text(viewModel.errorMessage))
         }
     }
-
 }
 
 #Preview {
@@ -42,5 +41,5 @@ struct NewBookView: View {
         return true
     }, set: { _ in
         
-    } ))
+    }))
 }

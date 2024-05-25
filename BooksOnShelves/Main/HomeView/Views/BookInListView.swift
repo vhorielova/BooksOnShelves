@@ -40,7 +40,7 @@ struct BookInListView: View {
 
                     HStack{
                         Text("Rate:")
-                        Text(item.rate)
+                        Text(String(item.rate))
                             .font(Font.custom("Inria Serif", size: 17))
                             .foregroundColor(.black)
                     }
@@ -56,5 +56,5 @@ struct BookInListView: View {
 }
 
 #Preview {
-    BookInListView(item: .init(id: "123", title: "abc", author: "ghk", rate: "2"))
+    BookInListView(item: .init(id: "123", title: "abc", author: "ghk", rate: 2))
 }
