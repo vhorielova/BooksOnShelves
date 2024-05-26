@@ -3,20 +3,34 @@ import SwiftUI
 struct NewBookView: View {
     @StateObject var viewModel = NewBookViewViewModel()
     @Binding var newItemPresented: Bool
+    @State private var showImagePicker: Bool = false
     
     var body: some View {
-        VStack{
+        VStack {
             Text("Add a Book")
                 .bold()
                 .font(.system(size: 36))
                 .foregroundColor(.white)
                 .padding(.top, 30)
             
-            Form{
+            Form {
                 TextField("Title", text: $viewModel.title)
                 TextField("Author", text: $viewModel.author)
-                TextField("Rate: from 1 to 10", text: $viewModel.rate)
+                TextField("Rate", text: $viewModel.rate)
                     .keyboardType(.numberPad)
+                
+                if let image = viewModel.selectedImage {
+                    Image(uiImage: image)
+                        .resizable()
+                        .scaledToFit()
+                        .frame(width: 76, height: 103)
+                }
+
+                Button(action: {
+                    showImagePicker = true
+                }) {
+                    Text("Select image of book")
+                }
                 
                 TLButton(title: "Save") {
                     if viewModel.canSave {
@@ -30,6 +44,9 @@ struct NewBookView: View {
             }
         }
         .background(Color.mainPink)
+        .sheet(isPresented: $showImagePicker) {
+            ImagePicker(selectedImage: $viewModel.selectedImage)
+        }
         .alert(isPresented: $viewModel.showAlert) {
             Alert(title: Text("Error"), message: Text(viewModel.errorMessage))
         }

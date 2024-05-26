@@ -5,7 +5,5 @@ struct Book: Codable, Identifiable, Equatable {
     let title: String
     let author: String
     let rate: Int
-    //let notes: [String]
-    //let quotes: [String]
-    //let createdDate: TimeInterval
+    let imageUrl: String?  // Optional URL for the book image
 }
