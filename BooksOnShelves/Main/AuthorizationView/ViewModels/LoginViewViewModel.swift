@@ -24,7 +24,6 @@ class LoginViewViewModel: ObservableObject {
                 switch result {
                 case .success(let user):
                     self.errorMessage = ""
-                    // Do something with the user if needed
                     print("User signed in: \(user)")
                 case .failure(let error):
                     self.errorMessage = error.localizedDescription
