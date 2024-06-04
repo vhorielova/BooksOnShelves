@@ -7,7 +7,8 @@ class NewBookViewViewModel: ObservableObject {
     @Published var title: String = ""
     @Published var author: String = ""
     @Published var rate: String = ""
-    @Published var notes: [String] = [""]
+    @Published var description: String = ""
+    @Published var note: String = ""
     @Published var showAlert: Bool = false
     @Published var errorMessage: String = ""
     @Published var selectedImage: UIImage? = nil
@@ -17,6 +18,7 @@ class NewBookViewViewModel: ObservableObject {
 
     func save() {
         if !canSave {
+            showAlert = true
             return
         }
         
@@ -30,20 +32,37 @@ class NewBookViewViewModel: ObservableObject {
             return
         }
         
-        let newId = UUID().uuidString
         if let image = selectedImage {
             uploadImage(image) { [weak self] url in
-                guard let self = self, let url = url else {
-                    self?.errorMessage = "Failed to upload image."
-                    self?.showAlert = true
+                guard let self = self else { return }
+                guard let url = url else {
+                    self.errorMessage = "Failed to upload image."
+                    self.showAlert = true
                     return
                 }
 
-                let newItem = Book(id: newId, title: self.title, author: self.author, rate: rateInt, imageUrl: url.absoluteString)
+                let newItem = BookBuilder()
+                    .setId(UUID().uuidString)
+                    .setTitle(self.title)
+                    .setAuthor(self.author)
+                    .setRate(rateInt)
+                    .setImageUrl(url.absoluteString)
+                    .setDescription(self.description)
+                    .setNote(self.note)
+                    .build()
+
                 self.saveBook(newItem, userId: userId)
             }
         } else {
-            let newItem = Book(id: newId, title: title, author: author, rate: rateInt, imageUrl: nil)
+            let newItem = BookBuilder()
+                .setId(UUID().uuidString)
+                .setTitle(title)
+                .setAuthor(author)
+                .setRate(rateInt)
+                .setDescription(self.description)
+                .setNote(self.note)
+                .build()
+
             saveBook(newItem, userId: userId)
         }
     }
@@ -54,9 +73,14 @@ class NewBookViewViewModel: ObservableObject {
             .document(userId)
             .collection("books")
             .document(book.id)
-            .setData(book.asDictionary())
-        
-        print("Book saved")
+            .setData(book.asDictionary()) { error in
+                if let error = error {
+                    self.errorMessage = "Failed to save book: \(error.localizedDescription)"
+                    self.showAlert = true
+                } else {
+                    print("Book saved")
+                }
+            }
     }
 
     private func uploadImage(_ image: UIImage, completion: @escaping (URL?) -> Void) {
@@ -97,3 +121,4 @@ class NewBookViewViewModel: ObservableObject {
         return true
     }
 }
+

@@ -46,6 +46,6 @@ struct HomeView: View {
 
 struct HomeView_Previews: PreviewProvider{
     static var previews: some View{
-        HomeView(userId: "SQbTRRiY8dRc6jiRLJ8KlAHYwKm2")
+        HomeView(userId: "pWMKTKnp1wOL5sD9aYvZDm4wngE3")
     }
 }

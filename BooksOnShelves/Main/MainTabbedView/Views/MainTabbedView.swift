@@ -1,6 +1,6 @@
 import SwiftUI
 
-enum TabbedItems: Int, CaseIterable{
+enum TabbedItem: Int, CaseIterable{
     case bookshelf = 0
     //case favorite
     case wishList
@@ -66,7 +66,7 @@ struct MainTabbedView: View {
             ZStack{
                 
                 HStack{
-                    ForEach((TabbedItems.allCases), id: \.self){ item in
+                    ForEach((TabbedItem.allCases), id: \.self){ item in
                         Button{
                             selectedTab = item.rawValue
                         } label: {
@@ -77,7 +77,7 @@ struct MainTabbedView: View {
                 .padding(6)
             }
             .frame(height: 70)
-            .background(.mainPink.opacity(0.3))
+            .background(.violetBG.opacity(0.3))
             .cornerRadius(35)
             .padding()
             //.padding(.horizontal, 26)
@@ -95,17 +95,17 @@ extension MainTabbedView{
             Image(imageName)
                 .resizable()
                 .renderingMode(.template)
-                .foregroundColor(isActive ? .black : .gray)
+                .foregroundColor(isActive ? .text : .gray)
                 .frame(width: 20, height: 20)
             if isActive{
                 Text(title)
                     .font(.system(size: 14))
-                    .foregroundColor(isActive ? .black : .gray)
+                    .foregroundColor(isActive ? .text : .gray)
             }
             Spacer()
         }
         .frame(width: isActive ? .infinity : 60, height: 60)
-        .background(isActive ? .mainPink.opacity(0.6) : .clear)
+        .background(isActive ? .violetBG : .clear)
         .cornerRadius(30)
     }
 }

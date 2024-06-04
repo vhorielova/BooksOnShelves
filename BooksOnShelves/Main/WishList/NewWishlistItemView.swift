@@ -5,42 +5,28 @@ struct NewWishlistItemView: View {
     @Binding var newItemPresented: Bool
     
     var body: some View {
-        VStack{
+        VStack {
             Text("New wish-book")
                 .bold()
                 .font(.system(size: 36))
-                .foregroundColor(.white)
+                .foregroundColor(.text)
                 .padding(.top, 30)
             
-            Form{
+            Form {
                 TextField("Title", text: $viewModel.title.input)
                 TextField("Author", text: $viewModel.author.input)
                 
-                /*DatePicker("Due Date", selection: $viewModel.dueDate)
-                    .datePickerStyle(GraphicalDatePickerStyle())*/
-                
-                TLButton(title: "Save"){
-                    if viewModel.canSave{
-                        viewModel.save()
-                        newItemPresented = false
-                    } else {
-                        viewModel.showAlert = true
-                    }
-                }
-                .padding()
+                TLButton(title: "Save", command: SaveCommand(viewModel: viewModel, newItemPresented: $newItemPresented))
+                    .padding()
             }
         }
-        .background(.mainPink)
-        .alert(isPresented: $viewModel.showAlert){
+        .background(.violetBG)
+        .alert(isPresented: $viewModel.showAlert) {
             Alert(title: Text("Error"), message: Text("Fill in at least \"Title\" field"))
         }
     }
 }
 
 #Preview {
-    NewWishlistItemView(newItemPresented: Binding(get: {
-        return true
-    }, set: { _ in
-        
-    } ))
+    NewWishlistItemView(newItemPresented: .constant(true))
 }

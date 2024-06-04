@@ -2,13 +2,14 @@ import SwiftUI
 
 struct TLButton: View {
     let title: String
-    let action: () -> Void
+    let command: Command
+    
     var body: some View {
-        Button{
-            action()
+        Button {
+            command.execute()
         } label: {
-            ZStack{
-                RoundedRectangle(cornerRadius: /*@START_MENU_TOKEN@*/25.0/*@END_MENU_TOKEN@*/)
+            ZStack {
+                RoundedRectangle(cornerRadius: 25.0)
                     .foregroundStyle(.violetBG)
                     .shadow(color: .black.opacity(0.25), radius: 2, x: 0, y: 4)
                 Text(title)
@@ -16,11 +17,10 @@ struct TLButton: View {
                     .bold()
             }
         }
+        .frame(maxWidth: .infinity, maxHeight: 40)
     }
 }
 
 #Preview {
-    TLButton(title: "title"){
-        //action
-    }
+    TLButton(title: "title", command: SaveCommand(viewModel: NewWishlistItemViewViewModel(), newItemPresented: .constant(true)))
 }

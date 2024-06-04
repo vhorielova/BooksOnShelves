@@ -8,14 +8,14 @@ struct TitleView: View {
                 Rectangle()
                     .foregroundColor(.clear)
                     .frame(maxWidth: .infinity, maxHeight: 60)
-                    .background(Color(red: 0.99, green: 0.75, blue: 0.72))
+                    .background(Color.violetBG)
                 
                     .cornerRadius(15)
                     .shadow(color: .black.opacity(0.25), radius: 2, x: 0, y: 4)
                 Text(title)
                     .font(Font.custom("Inria Serif", size: 36))
                     .multilineTextAlignment(.center)
-                    .foregroundColor(.black)
+                    .foregroundColor(.text)
                 
                     .frame(maxWidth: .infinity, maxHeight: 42, alignment: .topLeading)
                     .padding(.top, 10)

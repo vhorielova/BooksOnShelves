@@ -4,6 +4,9 @@ import FirebaseFirestoreSwift
 struct ListOfBooksView: View {
     @ObservedObject var viewModel: ListOfBooksViewViewModel
     @FirestoreQuery var items: [Book]
+    @State private var selectedBook: Book?
+    @State private var isSingleBookPresented = false
+    let userId: String
     
     init(userId: String, valueToCompare: Int) {
         self._items = FirestoreQuery(collectionPath: "users/\(userId)/books")
@@ -20,16 +23,29 @@ struct ListOfBooksView: View {
         
         let viewModel = ListOfBooksViewViewModel(userId: userId, sortingStrategy: sortingStrategy)
         self._viewModel = ObservedObject(wrappedValue: viewModel)
+        self.userId = userId
     }
     
     var body: some View {
-        List(viewModel.sortBooks(items)) { item in
-            Button {
-                // go to the book
-            } label: {
-                BookInListView(item: item)
+        NavigationView {
+            List(viewModel.sortBooks(items)) { item in
+                Button {
+                    selectedBook = item
+                    isSingleBookPresented = true
+                } label: {
+                    BookInListView(item: item)
+                }
+            }
+            .listStyle(PlainListStyle())
+            .sheet(isPresented: $isSingleBookPresented) {
+                if let selectedBook = selectedBook {
+                    SingleBookView(userId: userId, book: selectedBook, isPresented: $isSingleBookPresented)
+                }
             }
         }
-        .listStyle(PlainListStyle())
     }
+}
+
+#Preview {
+    ListOfBooksView(userId: "pWMKTKnp1wOL5sD9aYvZDm4wngE3", valueToCompare: 1)
 }

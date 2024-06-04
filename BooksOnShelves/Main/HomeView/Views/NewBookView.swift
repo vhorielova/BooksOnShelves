@@ -10,13 +10,18 @@ struct NewBookView: View {
             Text("Add a Book")
                 .bold()
                 .font(.system(size: 36))
-                .foregroundColor(.white)
+                .foregroundColor(.text)
                 .padding(.top, 30)
             
             Form {
                 TextField("Title", text: $viewModel.title)
                 TextField("Author", text: $viewModel.author)
                 TextField("Rate", text: $viewModel.rate)
+                    .keyboardType(.numberPad)
+                TextField("Book description", text: $viewModel.description)
+                    .keyboardType(.numberPad)
+                    .frame(height: /*@START_MENU_TOKEN@*/100/*@END_MENU_TOKEN@*/)
+                TextField("Your note", text: $viewModel.note)
                     .keyboardType(.numberPad)
                 
                 if let image = viewModel.selectedImage {
@@ -32,20 +37,13 @@ struct NewBookView: View {
                     Text("Select image of book")
                 }
                 
-                TLButton(title: "Save") {
-                    if viewModel.canSave {
-                        viewModel.save()
-                        newItemPresented = false
-                    } else {
-                        viewModel.showAlert = true
-                    }
-                }
-                .padding()
+                TLButton(title: "Save", command: SaveBookCommand(viewModel: viewModel, newItemPresented: $newItemPresented))
+                    .padding()
             }
         }
-        .background(Color.mainPink)
+        .background(Color.violetBG)
         .sheet(isPresented: $showImagePicker) {
-            ImagePicker(selectedImage: $viewModel.selectedImage)
+            ImagePicker(selectedImage: $viewModel.selectedImage, width: 76, height: 103)
         }
         .alert(isPresented: $viewModel.showAlert) {
             Alert(title: Text("Error"), message: Text(viewModel.errorMessage))

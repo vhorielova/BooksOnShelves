@@ -1,13 +1,16 @@
 import Foundation
 import FirebaseAuth
 import FirebaseFirestore
+import FirebaseStorage
+import SwiftUI
 
-class CreateAccountViewViewModel: ObservableObject{
+class CreateAccountViewViewModel: ObservableObject {
     @Published var name: String = ""
     @Published var email: String = ""
     @Published var password: String = ""
     @Published var errorMessage: String = ""
     @Published var nickname: String = ""
+    @Published var selectedImage: UIImage? = nil
     
     init() {}
     
@@ -34,14 +37,40 @@ class CreateAccountViewViewModel: ObservableObject{
                         return
                     }
                     
-                    self?.insertUserRecord(id: userId)
+                    self?.uploadProfileImage(userId: userId)
                 }
             }
         }
     }
     
-    private func insertUserRecord(id: String) {
-        let newUser = User(id: id, name: name, email: email, nickname: nickname, joined: Date().timeIntervalSince1970)
+    private func uploadProfileImage(userId: String) {
+        guard let image = selectedImage, let imageData = image.jpegData(compressionQuality: 0.75) else {
+            insertUserRecord(id: userId, imageUrl: "")
+            return
+        }
+        
+        let storageRef = Storage.storage().reference().child("profile_images/\(userId).jpg")
+        storageRef.putData(imageData, metadata: nil) { [weak self] metadata, error in
+            guard error == nil else {
+                print("Failed to upload image: \(error!.localizedDescription)")
+                self?.insertUserRecord(id: userId, imageUrl: "")
+                return
+            }
+            
+            storageRef.downloadURL { [weak self] url, error in
+                guard let downloadUrl = url else {
+                    print("Failed to get download URL: \(error!.localizedDescription)")
+                    self?.insertUserRecord(id: userId, imageUrl: "")
+                    return
+                }
+                
+                self?.insertUserRecord(id: userId, imageUrl: downloadUrl.absoluteString)
+            }
+        }
+    }
+    
+    private func insertUserRecord(id: String, imageUrl: String) {
+        let newUser = User(id: id, name: name, email: email, nickname: nickname, joined: Date().timeIntervalSince1970, imageUrl: imageUrl)
         
         let db = Firestore.firestore()
         db.collection("users")

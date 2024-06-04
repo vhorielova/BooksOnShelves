@@ -40,7 +40,7 @@ class FirebaseService {
                 return
             }
             
-            let user = User(id: uid, name: name, email: email, nickname: nickname, joined: joined)
+            let user = User(id: uid, name: name, email: email, nickname: nickname, joined: joined, imageUrl: "")
             completion(.success(user))
         }
     }

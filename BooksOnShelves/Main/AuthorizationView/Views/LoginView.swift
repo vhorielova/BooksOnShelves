@@ -1,13 +1,10 @@
 import SwiftUI
 
 struct LoginView: View {
-    
     @StateObject var viewModel = LoginViewViewModel()
     
     var body: some View {
-        
         NavigationView {
-            
             VStack {
                 HeaderView()
                 
@@ -22,9 +19,7 @@ struct LoginView: View {
                         .autocapitalization(.none)
                     SecureField("Password", text: $viewModel.password)
                         .textFieldStyle(RoundedBorderTextFieldStyle())
-                    TLButton(title: "Log in") {
-                        viewModel.login()
-                    }
+                    TLButton(title: "Log in", command: LoginCommand(viewModel: viewModel))
                 }
                 .background(.white)
                 
@@ -32,15 +27,12 @@ struct LoginView: View {
                     Text("Don't have an account yet?")
                         .foregroundColor(.black)
                     NavigationLink("Create an account", destination: CreateAccountView())
-                    
                 }
                 .padding(.bottom, 40)
-                
             }
             .frame(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height)
             .ignoresSafeArea()
         }
-
     }
 }
 

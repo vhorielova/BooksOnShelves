@@ -4,6 +4,8 @@ import CropViewController
 
 struct ImagePicker: UIViewControllerRepresentable {
     @Binding var selectedImage: UIImage?
+    var width: Int
+    var height: Int
     @Environment(\.presentationMode) var presentationMode
 
     class Coordinator: NSObject, UINavigationControllerDelegate, UIImagePickerControllerDelegate, CropViewControllerDelegate {
@@ -17,7 +19,7 @@ struct ImagePicker: UIViewControllerRepresentable {
             if let image = info[.originalImage] as? UIImage {
                 let cropViewController = CropViewController(croppingStyle: .default, image: image)
                 cropViewController.delegate = self
-                cropViewController.customAspectRatio = CGSize(width: 76, height: 103)
+                cropViewController.customAspectRatio = CGSize(width: parent.width, height: parent.height)
                 cropViewController.aspectRatioLockEnabled = true
                 picker.pushViewController(cropViewController, animated: true)
             }
