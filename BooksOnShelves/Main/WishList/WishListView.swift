@@ -4,6 +4,7 @@ import FirebaseFirestoreSwift
 struct WishListView: View {
     @StateObject var viewModel: WishListViewViewModel
     @FirestoreQuery var items: [WishlistItem]
+    @State private var itemToDelete: WishlistItem?
 
     init(userId: String) {
         self._items = FirestoreQuery(collectionPath: "users/\(userId)/wishlist")
@@ -17,9 +18,9 @@ struct WishListView: View {
                 
                 List(items) { item in
                     WishlistItemView(item: item)
-                        .swipeActions{
-                            Button{
-                                viewModel.delete(id: item.id)
+                        .swipeActions {
+                            Button {
+                                itemToDelete = item
                             } label: {
                                 Text("Delete")
                                     .tint(.mainGrey)
@@ -41,11 +42,20 @@ struct WishListView: View {
                             .bold()
                     }
                     .padding()
-
                 }
             }
             .sheet(isPresented: $viewModel.showingNewItemView) {
                 NewWishlistItemView(newItemPresented: $viewModel.showingNewItemView)
+            }
+            .alert(item: $itemToDelete) { item in
+                Alert(
+                    title: Text("Delete Item"),
+                    message: Text("Are you sure you want to delete this item?"),
+                    primaryButton: .destructive(Text("Delete")) {
+                        viewModel.delete(id: item.id)
+                    },
+                    secondaryButton: .cancel()
+                )
             }
         }
     }
