@@ -244,9 +244,17 @@
 			path = ViewModels;
 			sourceTree = "<group>";
 		};
+		6A925F2E2C1E051100DF5FEE /* docs */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = docs;
+			sourceTree = "<group>";
+		};
 		6AB962102B0BE43900344257 = {
 			isa = PBXGroup;
 			children = (
+				6A925F2E2C1E051100DF5FEE /* docs */,
 				6AB9621B2B0BE43900344257 /* BooksOnShelves */,
 				6ADFD0942B87ABC00005B2CC /* BooksOnShelvesTests */,
 				6AB9621A2B0BE43900344257 /* Products */,
@@ -512,6 +520,7 @@
 			packageReferences = (
 				6AE3B5DC2B1E7D360060A86D /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
 				6AC547F42C0247710003C18F /* XCRemoteSwiftPackageReference "TOCropViewController" */,
+				6A925F2D2C1E01CB00DF5FEE /* XCRemoteSwiftPackageReference "swift-docc-plugin" */,
 			);
 			productRefGroup = 6AB9621A2B0BE43900344257 /* Products */;
 			projectDirPath = "";
@@ -869,6 +878,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		6A925F2D2C1E01CB00DF5FEE /* XCRemoteSwiftPackageReference "swift-docc-plugin" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/apple/swift-docc-plugin";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.3.0;
+			};
+		};
 		6AC547F42C0247710003C18F /* XCRemoteSwiftPackageReference "TOCropViewController" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/TimOliver/TOCropViewController";
