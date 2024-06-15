@@ -19,6 +19,7 @@
 		6A73B6932C0E06F2007C29EB /* EditBookViewViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A73B6922C0E06F2007C29EB /* EditBookViewViewModel.swift */; };
 		6A73B6952C0E070C007C29EB /* EditBookView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A73B6942C0E070C007C29EB /* EditBookView.swift */; };
 		6A749DDA2BF8ECB500A97172 /* SortingStrategy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A749DD92BF8ECB500A97172 /* SortingStrategy.swift */; };
+		6A925F302C1E10FE00DF5FEE /* snippet-extract in Frameworks */ = {isa = PBXBuildFile; productRef = 6A925F2F2C1E10FE00DF5FEE /* snippet-extract */; };
 		6AB9621D2B0BE43900344257 /* BooksOnShelvesApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AB9621C2B0BE43900344257 /* BooksOnShelvesApp.swift */; };
 		6AB9621F2B0BE43900344257 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AB9621E2B0BE43900344257 /* ContentView.swift */; };
 		6AB962212B0BE43A00344257 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6AB962202B0BE43A00344257 /* Assets.xcassets */; };
@@ -171,6 +172,7 @@
 				6AE3B5E62B1E7D360060A86D /* FirebaseAppCheck in Frameworks */,
 				6AE3B5E42B1E7D360060A86D /* FirebaseAnalyticsWithoutAdIdSupport in Frameworks */,
 				6AE3B5EA2B1E7D360060A86D /* FirebaseAuth in Frameworks */,
+				6A925F302C1E10FE00DF5FEE /* snippet-extract in Frameworks */,
 				6AE3B5FC2B1E7D360060A86D /* FirebaseRemoteConfigSwift in Frameworks */,
 				6AE3B5FA2B1E7D360060A86D /* FirebaseRemoteConfig in Frameworks */,
 				6AE3B5F62B1E7D360060A86D /* FirebaseMessaging in Frameworks */,
@@ -244,17 +246,9 @@
 			path = ViewModels;
 			sourceTree = "<group>";
 		};
-		6A925F2E2C1E051100DF5FEE /* docs */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = docs;
-			sourceTree = "<group>";
-		};
 		6AB962102B0BE43900344257 = {
 			isa = PBXGroup;
 			children = (
-				6A925F2E2C1E051100DF5FEE /* docs */,
 				6AB9621B2B0BE43900344257 /* BooksOnShelves */,
 				6ADFD0942B87ABC00005B2CC /* BooksOnShelvesTests */,
 				6AB9621A2B0BE43900344257 /* Products */,
@@ -466,6 +460,7 @@
 				6AE3B60E2B1F6DC90060A86D /* FirebaseFirestoreSwift */,
 				6AC547F52C0248220003C18F /* CropViewController */,
 				6AC547F72C0248220003C18F /* TOCropViewController */,
+				6A925F2F2C1E10FE00DF5FEE /* snippet-extract */,
 			);
 			productName = BooksOnShelves;
 			productReference = 6AB962192B0BE43900344257 /* BooksOnShelves.app */;
@@ -905,6 +900,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		6A925F2F2C1E10FE00DF5FEE /* snippet-extract */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 6A925F2D2C1E01CB00DF5FEE /* XCRemoteSwiftPackageReference "swift-docc-plugin" */;
+			productName = "snippet-extract";
+		};
 		6AC547F52C0248220003C18F /* CropViewController */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 6AC547F42C0247710003C18F /* XCRemoteSwiftPackageReference "TOCropViewController" */;
