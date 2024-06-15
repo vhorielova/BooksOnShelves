@@ -1,8 +1,15 @@
 import SwiftUI
+import Combine
 
 struct EditProfileView: View {
     @ObservedObject var viewModel: EditProfileViewViewModel
     @State private var isImagePickerPresented = false
+    
+    func limitText(_ text: Binding<String>, _ upper: Int) {
+        if text.wrappedValue.count > upper {
+            text.wrappedValue = String(text.wrappedValue.prefix(upper))
+        }
+    }
 
     var body: some View {
         VStack {
@@ -51,6 +58,7 @@ struct EditProfileView: View {
                 TextField("Name", text: $viewModel.name)
                     .padding(.horizontal)
                     .textFieldStyle(RoundedBorderTextFieldStyle())
+                    .onReceive(Just(viewModel.name)) { _ in limitText($viewModel.name, 20) }
 
                 Text("Nickname:")
                     .padding(.horizontal)
@@ -58,6 +66,7 @@ struct EditProfileView: View {
                 TextField("Nickname", text: $viewModel.nickname)
                     .padding(.horizontal)
                     .textFieldStyle(RoundedBorderTextFieldStyle())
+                    .onReceive(Just(viewModel.nickname)) { _ in limitText($viewModel.nickname, 30) }
             }
             .padding()
 
@@ -66,18 +75,6 @@ struct EditProfileView: View {
             TLButton(title: "Save", command: SaveEditedProfile(viewModel: viewModel))
                 .padding()
 
-            /*Button(action: {
-                viewModel.updateProfile()
-            }) {
-                Text("Save")
-                    .bold()
-                    .frame(maxWidth: .infinity)
-                    .padding()
-                    .background(Color.blue)
-                    .foregroundColor(.white)
-                    .cornerRadius(10)
-            }
-            .padding()*/
         }
         .sheet(isPresented: $isImagePickerPresented) {
             ImagePicker(selectedImage: $viewModel.image, width: 125, height: 125)

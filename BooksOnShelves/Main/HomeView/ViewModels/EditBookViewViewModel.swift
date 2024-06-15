@@ -13,6 +13,9 @@ class EditBookViewViewModel: ObservableObject {
     @Published var downloadedImage: UIImage?
     @Published var image: UIImage?
     @Published var successMessage: String?
+    @Published var quotes: [Quote] = []
+    @Published var newQuote: String = ""
+    @Published var textImage: UIImage? = nil
 
     var userId: String
     var bookId: String
@@ -21,6 +24,7 @@ class EditBookViewViewModel: ObservableObject {
         self.userId = userId
         self.bookId = bookId
         fetchBook()
+        fetchQuotes()
     }
 
     private func fetchBook() {
@@ -39,6 +43,19 @@ class EditBookViewViewModel: ObservableObject {
                 }
                 self.description = data["description"] as? String ?? ""
                 self.note = data["note"] as? String ?? ""
+            }
+        }
+    }
+
+    private func fetchQuotes() {
+        let db = Firestore.firestore()
+        db.collection("users").document(userId).collection("books").document(bookId).collection("quotes").getDocuments { snapshot, error in
+            if let error = error {
+                print("Error loading quotes: \(error.localizedDescription)")
+            } else {
+                self.quotes = snapshot?.documents.compactMap { document in
+                    try? document.data(as: Quote.self)
+                } ?? []
             }
         }
     }
@@ -66,8 +83,7 @@ class EditBookViewViewModel: ObservableObject {
                         print("Error updating book: \(error)")
                         self.successMessage = "Failed to save book details: \(error.localizedDescription)"
                     } else {
-                        print("Book successfully updated")
-                        self.successMessage = "Book details saved successfully!"
+                        self.successMessage = "Book details updated successfully."
                     }
                 }
             }
@@ -77,24 +93,26 @@ class EditBookViewViewModel: ObservableObject {
                     print("Error updating book: \(error)")
                     self.successMessage = "Failed to save book details: \(error.localizedDescription)"
                 } else {
-                    print("Book successfully updated")
-                    self.successMessage = "Book details saved successfully!"
+                    self.successMessage = "Book details updated successfully."
                 }
             }
         }
     }
 
-    private func fetchImage(from url: String) {
-        let storageRef = Storage.storage().reference(forURL: url)
-        storageRef.getData(maxSize: 10 * 1024 * 1024) { data, error in
-            if let error = error {
-                print("Failed to download image: \(error)")
-            } else if let data = data {
-                DispatchQueue.main.async {
-                    self.downloadedImage = UIImage(data: data)
-                }
-            }
+    private func fetchImage(from urlString: String) {
+        guard let url = URL(string: urlString) else {
+            return
         }
+
+        URLSession.shared.dataTask(with: url) { data, response, error in
+            guard let data = data, error == nil, let image = UIImage(data: data) else {
+                return
+            }
+
+            DispatchQueue.main.async {
+                self.downloadedImage = image
+            }
+        }.resume()
     }
 
     private func uploadImage(_ image: UIImage, completion: @escaping (String?) -> Void) {
@@ -103,21 +121,61 @@ class EditBookViewViewModel: ObservableObject {
             return
         }
 
-        let storageRef = Storage.storage().reference().child("book_covers/\(UUID().uuidString).jpg")
+        let storageRef = Storage.storage().reference().child("book_images/\(UUID().uuidString).jpg")
         storageRef.putData(imageData, metadata: nil) { metadata, error in
-            if let error = error {
-                print("Error uploading image: \(error)")
+            guard error == nil else {
                 completion(nil)
+                return
+            }
+
+            storageRef.downloadURL { url, error in
+                completion(url?.absoluteString)
+            }
+        }
+    }
+
+    func addQuote() {
+        guard !newQuote.isEmpty else {
+            return
+        }
+
+        let db = Firestore.firestore()
+        let quoteRef = db.collection("users").document(userId).collection("books").document(bookId).collection("quotes").document()
+        let quote = Quote(id: quoteRef.documentID, quote: newQuote)
+        
+        do {
+            try quoteRef.setData(from: quote)
+            quotes.append(quote)
+            newQuote = ""
+        } catch {
+            print("Error adding quote: \(error)")
+        }
+    }
+
+    func deleteQuote(_ quote: Quote) {
+        let db = Firestore.firestore()
+        let quoteRef = db.collection("users").document(userId).collection("books").document(bookId).collection("quotes").document(quote.id)
+        
+        quoteRef.delete { error in
+            if let error = error {
+                print("Error deleting quote: \(error)")
             } else {
-                storageRef.downloadURL { url, error in
-                    if let error = error {
-                        print("Error getting download URL: \(error)")
-                        completion(nil)
-                    } else {
-                        completion(url?.absoluteString)
-                    }
+                if let index = self.quotes.firstIndex(where: { $0.id == quote.id }) {
+                    self.quotes.remove(at: index)
                 }
             }
+        }
+    }
+
+    func appendDescription(with text: String?) {
+        if let text = text {
+            description.append(text)
+        }
+    }
+
+    func appendQuote(at index: Int, with text: String?) {
+        if let text = text, index < quotes.count {
+            quotes[index].quote.append(text)
         }
     }
 }

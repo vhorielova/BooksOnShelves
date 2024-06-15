@@ -2,7 +2,6 @@ import SwiftUI
 
 struct ProfileView: View {
     @StateObject var viewModel = ProfileViewViewModel()
-    @StateObject var subscriptionViewModel = SubscriptionViewModel()
     var userId: String // ID профілю користувача, якого переглядаємо
 
     @State private var isEditProfilePresented = false
@@ -80,10 +79,6 @@ struct ProfileView: View {
                             .padding(.bottom)
                             .padding(.horizontal)
                             
-                    } else {
-                        // TLButton(title: "Follow", command: FollowUserCommand(viewModel: subscriptionViewModel, userId: user.id))
-                        // .padding()
-                        // .frame(height: 80)
                     }
                 } else {
                     Text("Loading profile...")

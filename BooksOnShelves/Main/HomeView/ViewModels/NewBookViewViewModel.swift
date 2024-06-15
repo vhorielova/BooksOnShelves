@@ -1,7 +1,8 @@
-import SwiftUI
-import FirebaseAuth
-import FirebaseFirestore
+import Foundation
 import FirebaseStorage
+import FirebaseAuth
+import SwiftUI
+import FirebaseFirestore
 
 class NewBookViewViewModel: ObservableObject {
     @Published var title: String = ""
@@ -12,9 +13,16 @@ class NewBookViewViewModel: ObservableObject {
     @Published var showAlert: Bool = false
     @Published var errorMessage: String = ""
     @Published var selectedImage: UIImage? = nil
+    @Published var textImage: UIImage? = nil
     @Published var isUploading: Bool = false
-
+    @Published var quotes: [Quote] = []
+    
     init() {}
+
+    func addQuote() {
+        let newQuote = Quote(id: UUID().uuidString, quote: "")
+        quotes.append(newQuote)
+    }
 
     func save() {
         if !canSave {
@@ -69,18 +77,42 @@ class NewBookViewViewModel: ObservableObject {
 
     private func saveBook(_ book: Book, userId: String) {
         let db = Firestore.firestore()
-        db.collection("users")
+        let bookRef = db.collection("users")
             .document(userId)
             .collection("books")
             .document(book.id)
-            .setData(book.asDictionary()) { error in
+        
+        bookRef.setData(book.asDictionary()) { error in
+            if let error = error {
+                self.errorMessage = "Failed to save book: \(error.localizedDescription)"
+                self.showAlert = true
+            } else {
+                print("Book saved")
+                self.saveQuotes(bookId: book.id, userId: userId)
+            }
+        }
+    }
+
+    private func saveQuotes(bookId: String, userId: String) {
+        let db = Firestore.firestore()
+        let quotesCollectionRef = db.collection("users")
+            .document(userId)
+            .collection("books")
+            .document(bookId)
+            .collection("quotes")
+        
+        let nonEmptyQuotes = quotes.filter { !$0.quote.trimmingCharacters(in: .whitespaces).isEmpty }
+        
+        for quote in nonEmptyQuotes {
+            quotesCollectionRef.document(quote.id).setData(quote.asDictionary()) { error in
                 if let error = error {
-                    self.errorMessage = "Failed to save book: \(error.localizedDescription)"
+                    self.errorMessage = "Failed to save quote: \(error.localizedDescription)"
                     self.showAlert = true
                 } else {
-                    print("Book saved")
+                    print("Quote saved")
                 }
             }
+        }
     }
 
     private func uploadImage(_ image: UIImage, completion: @escaping (URL?) -> Void) {
@@ -107,6 +139,17 @@ class NewBookViewViewModel: ObservableObject {
         }
     }
     
+    func appendDescription(with text: String?) {
+        if let text = text {
+            description += "\n" + text
+        }
+    }
+    
+    func appendQuote(at index: Int, with text: String) {
+        guard index < quotes.count else { return }
+        quotes[index].quote += " " + text
+    }
+    
     var canSave: Bool {
         guard !title.trimmingCharacters(in: .whitespaces).isEmpty else {
             errorMessage = "Title cannot be empty."
@@ -121,4 +164,3 @@ class NewBookViewViewModel: ObservableObject {
         return true
     }
 }
-

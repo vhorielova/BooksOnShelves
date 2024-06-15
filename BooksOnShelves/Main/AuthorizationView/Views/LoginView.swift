@@ -1,7 +1,14 @@
 import SwiftUI
+import Combine
 
 struct LoginView: View {
     @StateObject var viewModel = LoginViewViewModel()
+    
+    func limitText(_ text: Binding<String>, _ upper: Int) {
+        if text.wrappedValue.count > upper {
+            text.wrappedValue = String(text.wrappedValue.prefix(upper))
+        }
+    }
     
     var body: some View {
         NavigationView {
@@ -17,8 +24,10 @@ struct LoginView: View {
                         .textFieldStyle(RoundedBorderTextFieldStyle())
                         .autocorrectionDisabled()
                         .autocapitalization(.none)
+                        .onReceive(Just(viewModel.email)) { _ in limitText($viewModel.email, 50) }
                     SecureField("Password", text: $viewModel.password)
                         .textFieldStyle(RoundedBorderTextFieldStyle())
+                        .onReceive(Just(viewModel.password)) { _ in limitText($viewModel.password, 30) }
                     TLButton(title: "Log in", command: LoginCommand(viewModel: viewModel))
                 }
                 .background(.white)

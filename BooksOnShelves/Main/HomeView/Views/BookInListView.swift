@@ -9,7 +9,7 @@ struct BookInListView: View {
             Rectangle()
                 .foregroundColor(.clear)
                 .frame(width: .infinity, height: 150)
-                .background(Color(red: 0.99, green: 0.75, blue: 0.72).opacity(0.27))
+                .background(.violetBG.opacity(0.3))
                 .cornerRadius(15)
                 .shadow(color: .black.opacity(0.25), radius: 2, x: 0, y: 4)
             HStack {

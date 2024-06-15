@@ -14,33 +14,47 @@ struct SingleBookView: View {
     
     var body: some View {
         VStack {
-            Form {
-                Section(header: Text("Book Details")) {
-                    Text("Title: \(viewModel.book.title)")
-                    Text("Author: \(viewModel.book.author)")
-                    Text("Rating: \(viewModel.book.rate)")
-                    Text("Description: \(viewModel.book.description)")
-                    Text("Note: \(viewModel.book.note)")
-                }
-                TLButton(title: "Edit", command: EditBookCommand(viewModel: viewModel, showEditor: $isEditSheetPresented))
-                TLButton(title: "Delete", command: DeleteBookCommand(viewModel: viewModel, showDeleteConfirmation: $showDeleteConfirmation))
-                    .alert(isPresented: $showDeleteConfirmation) {
-                        Alert(
-                            title: Text("Delete Book"),
-                            message: Text("Are you sure you want to delete this book?"),
-                            primaryButton: .destructive(Text("Delete")) {
-                                viewModel.deleteBook()
-                                self.isPresented = false
-                            },
-                            secondaryButton: .cancel()
-                        )
+            if viewModel.isLoading {
+                ProgressView()
+            } else {
+                Form {
+                    Section(header: Text("Book Details")) {
+                        Text("Title: \(viewModel.book.title)")
+                        Text("Author: \(viewModel.book.author)")
+                        Text("Rating: \(viewModel.book.rate)")
+                        Text("Description: \(viewModel.book.description)")
+                        Text("Note: \(viewModel.book.note)")
                     }
+                    
+                    Section(header: Text("Цитати")) {
+                        ForEach(viewModel.quotes) { quote in
+                            Text(quote.quote)
+                        }
+                    }
+
+                    TLButton(title: "Edit", command: EditBookCommand(viewModel: viewModel, showEditor: $isEditSheetPresented))
+                    TLButton(title: "Delete", command: DeleteBookCommand(viewModel: viewModel, showDeleteConfirmation: $showDeleteConfirmation))
+                        .alert(isPresented: $showDeleteConfirmation) {
+                            Alert(
+                                title: Text("Delete Book"),
+                                message: Text("Are you sure you want to delete this book?"),
+                                primaryButton: .destructive(Text("Delete")) {
+                                    viewModel.deleteBook()
+                                    self.isPresented = false
+                                },
+                                secondaryButton: .cancel()
+                            )
+                        }
+                }
             }
         }
         .navigationTitle(viewModel.book.title)
         .navigationBarTitleDisplayMode(.inline)
         .sheet(isPresented: $isEditSheetPresented) {
             EditBookView(viewModel: EditBookViewViewModel(userId: viewModel.userId, bookId: viewModel.book.id))
+        }
+        .onAppear {
+            viewModel.loadQuotes()
         }
     }
 }
